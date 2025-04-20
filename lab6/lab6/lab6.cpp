@@ -55,7 +55,7 @@ void fileIn(std::string filename, int* array, const int size) {
     file.close();
 }
 
-void bitsort(int* a, int l, int r, int k) {
+void bitsort(int* array, int l, int r, int k) {
     if (l >= r || k < 0)
         return;
 
@@ -64,16 +64,16 @@ void bitsort(int* a, int l, int r, int k) {
 
     if (k == 31) {
         while (i <= j) {
-            while ((i <= j) && ((a[i] >> k) & 1) == 0) {
+            while ((i <= j) && ((array[i] >> k) & 1) == 0) {
                 i++;
             }
-            while ((i <= j) && ((a[j] >> k) & 1) == 1) {
+            while ((i <= j) && ((array[j] >> k) & 1) == 1) {
                 j--;
             }
             if (i < j) {
-                tmp = a[i];
-                a[i] = a[j];
-                a[j] = tmp;
+                tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
                 i++;
                 j--;
             }
@@ -82,26 +82,26 @@ void bitsort(int* a, int l, int r, int k) {
     else
     {
         while (i <= j) {
-            while ((i <= j) && ((a[i] >> k) & 1) == 0) {
+            while ((i <= j) && ((array[i] >> k) & 1) == 0) {
                 i++;
             }
-            while ((i <= j) && ((a[j] >> k) & 1) == 1) {
+            while ((i <= j) && ((array[j] >> k) & 1) == 1) {
                 j--;
             }
 
             if (i < j)
             {
-                tmp = a[i];
-                a[i] = a[j];
-                a[j] = tmp;
+                tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
                 i++;
                 j--;
             }
         }
     }
     // Рекурсивные вызовы для сортировки двух частей
-    bitsort(a, l, j, k - 1);
-    bitsort(a, i, r, k - 1);
+    bitsort(array, l, j, k - 1);
+    bitsort(array, i, r, k - 1);
 }
 
 void launch(const int size, int from, int to, int number)
