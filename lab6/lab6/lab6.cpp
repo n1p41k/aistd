@@ -62,24 +62,43 @@ void bitsort(int* a, int l, int r, int k) {
     int i = l, j = r;
     int tmp;
 
-    while (i <= j) {
-        while ((i <= j) && ((a[i] >> k) & 1) == 0) {
-            i++;
-        }
-        while ((i <= j) && ((a[j] >> k) & 1) == 1) {
-            j--;
-        }
-
-        if (i < j)
-        {
-            tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
-            i++;
-            j--;
+    if (k == 31) {
+        while (i <= j) {
+            while ((i <= j) && ((a[i] >> k) & 1) == 0) {
+                i++;
+            }
+            while ((i <= j) && ((a[j] >> k) & 1) == 1) {
+                j--;
+            }
+            if (i < j) {
+                tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+                i++;
+                j--;
+            }
         }
     }
+    else
+    {
+        while (i <= j) {
+            while ((i <= j) && ((a[i] >> k) & 1) == 0) {
+                i++;
+            }
+            while ((i <= j) && ((a[j] >> k) & 1) == 1) {
+                j--;
+            }
 
+            if (i < j)
+            {
+                tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+                i++;
+                j--;
+            }
+        }
+    }
     // Рекурсивные вызовы для сортировки двух частей
     bitsort(a, l, j, k - 1);
     bitsort(a, i, r, k - 1);
@@ -131,15 +150,14 @@ void launch(const int size, int from, int to, int number)
 
 int main()
 {
-  
-    launch(10000, 0, 10, 1);
-    launch(10000, 0, 1000, 2);
-    launch(10000, 0, 100000, 3);
-    launch(100000, 0, 10, 4);
-    launch(100000, 0, 1000, 5);
-    launch(100000, 0, 100000, 6);
-    launch(1000000, 0, 10, 7);
-    launch(1000000, 0, 1000, 8);
-    launch(1000000, 0, 100000, 9);
+    launch(10000, -10, 10, 1);
+    launch(10000, -1000, 1000, 2);
+    launch(10000, -100000, 100000, 3);
+    launch(100000, -10, 10, 4);
+    launch(100000, -1000, 1000, 5);
+    launch(100000, -100000, 100000, 6);
+    launch(1000000, -10, 10, 7);
+    launch(1000000, -1000, 1000, 8);
+    launch(1000000, -100000, 100000, 9);
     return 0;
 }
